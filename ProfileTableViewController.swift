@@ -18,7 +18,7 @@ class ProfileTableViewController: UITableViewController {
         super.viewDidLoad()
 
         //load sample data
-       // loadSampleProfiles()
+        loadSampleProfiles()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,7 +118,7 @@ class ProfileTableViewController: UITableViewController {
     // MARK: Private Methods
     
     // helper method to load sample data
-    private func loadSampleMeals(){
+    private func loadSampleProfiles(){
    
         //load the images
         let photo1 = UIImage(named: "user1")
