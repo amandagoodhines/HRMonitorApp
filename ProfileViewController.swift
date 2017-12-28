@@ -17,6 +17,12 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     @IBOutlet weak var ageTextField: UITextField!
     @IBOutlet weak var sportTextField: UITextField!
     @IBOutlet weak var saveButton: UIBarButtonItem!
+    @IBOutlet weak var heightTextField: UITextField!
+    @IBOutlet weak var weightTextField: UITextField!
+    @IBOutlet weak var userIDTextField: UITextField!
+    
+    
+    
     
     /* This value is either passed by 'ProfileTableViewController' in 'prepare(for:sender:)' or constructed as part of adding a new profile.*/
     var profile: Profile?
@@ -32,6 +38,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
        // updateSaveButtonState()
     }
 
+    
+    
+    
     
     //MARK: UITextFieldDelegate
     
@@ -93,10 +102,16 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         let age = ageTextField.text
         let sport = sportTextField.text
         let photo = photoImageView.image
+        let height = heightTextField.text
+        let weight = weightTextField.text
+        let userID = userIDTextField.text
+        
+     
+        
     
         
         //set the profile to be passed to ProfileTableViewController after the unwind segue.... initializes them.
-        profile = Profile(name:name, age:age!, sport:sport!, photo:photo)
+        profile = Profile(name:name, age:age!, sport:sport!, photo:photo, height:height!, weight:weight!, userID:userID!)
     }
     
   
@@ -119,6 +134,9 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         imagePickerController.delegate = self
         present(imagePickerController, animated: true, completion: nil)
     }
+    
+ 
+    
    /*
     //MARK: Private methods
     private func updateSaveButtonState(){
