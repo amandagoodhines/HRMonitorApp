@@ -139,7 +139,7 @@ class ProfileTableViewController: UITableViewController {
             
             if let selectedIndexpath = tableView.indexPathForSelectedRow{
                 //Update existing meal.
-                meals[selectedIndexpath.row] = meal
+                profiles[selectedIndexpath.row] = profile
                 tableView.reloadRows(at: [selectedIndexpath], with: .none)
             }
             else{
