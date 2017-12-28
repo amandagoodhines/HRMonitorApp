@@ -136,11 +136,20 @@ class ProfileTableViewController: UITableViewController {
     @IBAction func unwindToProfileList(sender: UIStoryboardSegue){
         if let sourceViewController = sender.source as? ProfileViewController, let profile = sourceViewController.profile{
             
-            //add new meal
-            let newIndexPath = IndexPath(row: profiles.count, section: 0)
             
-            profiles.append(profile)
-            tableView.insertRows(at: [newIndexPath], with: .automatic)
+            if let selectedIndexpath = tableView.indexPathForSelectedRow{
+                //Update existing meal.
+                meals[selectedIndexpath.row] = meal
+                tableView.reloadRows(at: [selectedIndexpath], with: .none)
+            }
+            else{
+                //add a new profile
+                let newIndexPath = IndexPath(row:profiles.count, section:0)
+                
+                profiles.append(profile)
+                
+                tableView.insertRows(at: [newIndexPath], with: .automatic)
+            }
         }
     }
     
