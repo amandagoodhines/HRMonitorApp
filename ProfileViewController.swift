@@ -34,6 +34,19 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
         // Handle text field's user input through delegate callbacks.
         nameTextField.delegate = self
         
+        //set up views if editing existing Profiles
+        if let profile = profile{
+            navigationItem.title = profile.name
+            nameTextField.text = profile.name
+            ageTextField.text = profile.age
+            sportTextField.text = profile.sport
+            photoImageView.image = profile.photo
+            heightTextField.text = profile.height
+            weightTextField.text = profile.weight
+            userIDTextField.text = profile.userID
+            
+        }
+        
         //enable the save button only if the text field has a valid profile name
        // updateSaveButtonState()
     }
