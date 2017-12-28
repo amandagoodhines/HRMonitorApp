@@ -14,9 +14,12 @@ class Profile{
     var age: String
     var sport: String
     var photo: UIImage?
+    var height: String
+    var weight: String
+    var userID: String
     
     //MARK: Initialization
-    init?(name:String, age:String, sport:String, photo:UIImage?){
+    init?(name:String, age:String, sport:String, photo:UIImage?, height: String, weight: String, userID: String){
         
         //the name musn't be empty
         guard !name.isEmpty else {
@@ -35,6 +38,10 @@ class Profile{
     self.age = age
     self.sport = sport
     self.photo = photo
+    self.height = height
+    self.weight = weight
+    self.userID = userID
+
     }
     
 }
