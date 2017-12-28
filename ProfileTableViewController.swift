@@ -53,7 +53,9 @@ class ProfileTableViewController: UITableViewController {
         cell.ageLabel.text = profile.age
         cell.sportLabel.text = profile.sport
         cell.photoImageView.image = profile.photo
-      
+        cell.heightLabel.text = profile.height
+        cell.weightLabel.text = profile.weight
+        cell.userIDLabel.text = profile.userID
         
         return cell
     }
@@ -126,11 +128,11 @@ class ProfileTableViewController: UITableViewController {
         let photo3 = UIImage(named: "user3")
   
         //create three profile objects
-        guard let profile1 = Profile(name: "Lauren Chester", age: "21", sport: "Soccer", photo: photo1) else{fatalError( "Unable to instantiate profile1")}
+        guard let profile1 = Profile(name: "Lauren Chester", age: "21", sport: "Soccer", photo: photo1, height: "68", weight: "160", userID: "LC08") else{fatalError( "Unable to instantiate profile1")}
         
-        guard let profile2 = Profile(name: "Danielle Losquadro", age: "20", sport: "Soccer", photo: photo2) else{fatalError("Unable to instantiate profile2")}
+        guard let profile2 = Profile(name: "Danielle Losquadro", age: "20", sport: "Soccer", photo: photo2, height: "65", weight: "152", userID: "D123") else{fatalError("Unable to instantiate profile2")}
         
-        guard let profile3 = Profile(name: "Amanda Goodhines", age: "20", sport: "Soccer", photo: photo3) else{fatalError("Unable to instantiate profile3")}
+        guard let profile3 = Profile(name: "Amanda Olsen", age: "22", sport: "Basketball", photo: photo3, height: "71", weight: "172", userID: "WO33") else{fatalError("Unable to instantiate profile3")}
         
         //add profiles to array
         profiles += [profile1, profile2, profile3]
