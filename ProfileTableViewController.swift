@@ -7,6 +7,7 @@
 //
 
 import UIKit
+impot os.log
 
 class ProfileTableViewController: UITableViewController {
 
@@ -100,10 +101,37 @@ class ProfileTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        
+        super.prepare(for: segue, sender:sender)
+        
+        switch(segue.identifier ?? ""){
+        
+        case "AddItem":
+            os_log("Adding a new profile", log: OSLog.default, type: .debug)
+        
+        case "ShowDetail":
+            guard let profileDetailViewController = segue.destination as? ProfileViewController
+                else{
+                    fatalError("Unexpected Destination \(segue.destination) ")
+            }
+            
+            guard let selectedProfileCell = sender as? ProfileTableViewCell else{
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedProfileCell) else{
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedProfile = profiles[indexPath.row]
+            profileDetailViewController.profile = selectedProfile
+            
+        default:
+            fatalError("Unexpected Segue Identifier; \(segue.identifier) ")
+        }    
     }
   
+    
        //MARK: Actions
     @IBAction func unwindToProfileList(sender: UIStoryboardSegue){
         if let sourceViewController = sender.source as? ProfileViewController, let profile = sourceViewController.profile{
