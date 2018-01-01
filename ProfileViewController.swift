@@ -97,7 +97,15 @@ class ProfileViewController: UIViewController, UITextFieldDelegate, UIImagePicke
     // MARK: - Navigation
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
+         //Depending on style of presentation (modal or push presentation), this view controller needs to be dismissed in two different ways
+        let isPresentingInAddProfileMode = presentingViewController is UINavigationController
+        if isPresentingInAddProfileMode {
+             dismiss(animated: true, completion: nil)
+        } else if let owningNavigationController = navigationController{
+            owningNavigationController.popViewController(animated: true)
+        } else{
+            fatalError("The ProfileViewController is not inside the navigation controller.")
+        }
     }
     
     //This method lets you configure a view controller before it's presented
