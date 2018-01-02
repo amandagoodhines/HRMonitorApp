@@ -30,9 +30,7 @@ class Profile: NSObject, NSCoding {
         guard !name.isEmpty else {
             return nil
         }
-       
-    
-    
+        
     // Initialize stored properties
     self.name = name
     self.age = age
@@ -54,9 +52,6 @@ class Profile: NSObject, NSCoding {
         aCoder.encode(userID, forKey: PropertyKey.userID)
     }
     
-    
-    //note: look into which variables are optionals. and if they need to be unwinded (which requires the guard & else statement below)
-    //other suggested solution is to not have the guard & else statement, and have a ! after the variable in the initialization statement instead. 
     required convenience init?(coder aDecoder: NSCoder) {
         //the name is required, so if we cannot decode a name string, the initializer should fail
         guard let name = aDecoder.decodeObject(forKey: PropertyKey.name) as? String
