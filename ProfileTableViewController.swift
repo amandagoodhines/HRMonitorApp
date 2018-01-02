@@ -21,8 +21,14 @@ class ProfileTableViewController: UITableViewController {
         // use the edit button provided by the table view controller
         navigationItem.leftBarButtonItem = editButtonItem
        
-        //load sample data
-        loadSampleProfiles()
+           //Load any saved profiles, otherwise upload sample data
+        if let savedProfiles = loadProfiles() {
+            profiles += savedProfiles
+        }
+        else{
+            //load sample data
+            loadSampleProfiles()
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -78,6 +84,7 @@ class ProfileTableViewController: UITableViewController {
         if editingStyle == .delete {
             // Delete the row from the data source
             profiles.remove(at: indexPath.row)
+            saveProfiles()
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
@@ -154,6 +161,9 @@ class ProfileTableViewController: UITableViewController {
                 
                 tableView.insertRows(at: [newIndexPath], with: .automatic)
             }
+            
+            //Save the profiles
+            saveProfiles()
         }
     }
     
@@ -179,6 +189,17 @@ class ProfileTableViewController: UITableViewController {
         profiles += [profile1, profile2, profile3]
     }
     
+    private func saveProfiles(){
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(profiles, toFile: Profile.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Profiles successfully saved", log: OSLog.default, type: .debug)
+        }else{
+            os_log("Failed to save profiles...", log: OSLog.default, type: .error)
+        }
+    }
     
+    private func loadProfiles() -> [Profile]? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: Profile.ArchiveURL.path) as? [Profile]
+    }
 
 }
